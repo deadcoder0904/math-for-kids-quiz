@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+main {
+  overflow: auto;
+  position: relative;
+  height: 100vh;
+}
+
+main:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url('painting.jpeg');
+  background-size:cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(4px);
+}
+
+h1 {
+	text-align: center;
+	font-family: 'Verdana';
+	letter-spacing: 0.1em;
+	font-size: 6.5em;
+	margin-bottom: 0.5em;
+	color: yellow;
+	text-shadow: 4px 3px 5px orange;
+}
+
+#quiz {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#level {
+	font-family: Verdana;
+	letter-spacing: 0.1em;
+	font-size: 5em;
+	font-variant: small-caps;
+	font-weight: bolder;
+	color: #FA175f;
+	background: rgba(1,121,232,0.7);
+	border-radius: 2em 2em 0 0;
+	padding: 0.5em;
+	margin: 0.2em;
+}
+
+#sum {
+	font-family: cursive;
+	font-size: 4em;
+	font-weight: bolder;
+    line-height: 1.2;
+	padding: 0.5em;
+	background: rgba(1,1,1,0.7);
+	color: orange;
+}
+
+input {
+	font-family: cursive;
+	text-align: center;
+    width: 1.5em;
+    font-size: 1.75em;
+    font-weight: bold;
+    line-height: 1.2;
+    color: red;
+    border: none;
+    border-bottom: 5px solid red;
+    background: none;
+    outline: none;
+}
+
+#score {
+	align-self: center;
+	font-family: cursive;
+	font-size: 3em;
+	font-weight: bolder;
+	padding: 0.2em;
+	display: inline-block;
+	text-shadow: 4px 3px 5px lightblue;
+	background: rgba(5,255,2,0.5);
+	transform: rotate(-10deg);
+	color: black;
+}
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+}
+@keyframes octocat-wave {
+    0%, 100% {
+        transform: rotate(0)
+    }
+    20%,
+    60% {
+        transform: rotate(-25deg)
+    }
+    40%,
+    80% {
+        transform: rotate(10deg)
+    }
+}
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none
+    }
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+    }
+}

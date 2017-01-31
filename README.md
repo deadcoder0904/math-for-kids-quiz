@@ -4,7 +4,7 @@
 
 # Screenshot
 
-![math-for-kids-quiz](.png)
+![math-for-kids-quiz](http://imgur.com/SNPtxiP.png)
 
 ## License
 
