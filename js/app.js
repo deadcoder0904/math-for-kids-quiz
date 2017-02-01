@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',function() {
 	const score = document.querySelector('#score');
 	const level = quiz.querySelector('#level');
 	const question = quiz.querySelector('#question');
-	let userScore = 0, totalQuestions = 0, userLevel = 1, operators = [], range = [], result = 0;
+	let userScore = 0, totalQuestions = 0, userLevel = 1, operators = [], range = [], result = 0, focus = true, num1, num2, randomOperator;
 
 	function setOperatorsAndRange() {
 		switch (userLevel) {
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded',function() {
 		score.innerHTML = `Score :- ${userScore} / ${totalQuestions}`;
 		level.innerHTML = `Level ${userLevel}`;
 		setOperatorsAndRange();
-		let num1 = randomNumber(range[0],range[1]);
-		let num2 = randomNumber(range[0],range[1]);
-		const randomOperator = operators[randomNumber(0,operators.length)];
+		num1 = randomNumber(range[0],range[1]);
+		num2 = randomNumber(range[0],range[1]);
+		randomOperator = operators[randomNumber(0,operators.length)];
 		if(randomOperator === '/') {
 			while(num1 % num2 !== 0) {
 				num1 = randomNumber(range[0],range[1]);
@@ -64,14 +64,17 @@ document.addEventListener('DOMContentLoaded',function() {
 
 	quiz.querySelector('[name=answer]').addEventListener('keyup', function(e) {
 		const ans = e.target.value;
-		if(e.which === 13) {
+		if(focus && e.which === 13) {
 			if(ans.length === 0) {
+				this.blur();
 				swal({
 					  title: 'Dumbass',
 					  text: 'Enter the answer!!',
-					  type: 'warning',
-					  timer: 1500
-					});
+					  type: 'warning'
+					}).then(function() {
+						this.focus();
+						focus = false;
+					}.bind(this));
 			}
 			else {
 				e.target.value = '';
@@ -79,24 +82,32 @@ document.addEventListener('DOMContentLoaded',function() {
 					userScore++;
 				}
 				else {
+					this.blur();
 					swal({
 					  title: 'Wrong Answer',
-					  text: `Correct answer is ${result}!!`,
-					  type: 'error',
-					  timer: 1500
-					});
+					  html: `<span id='correct_ans'>Correct answer for ${num1} ${randomOperator} ${num2} = ${result}</span>`,
+					  type: 'error'
+					}).then(function() {
+						this.focus();
+						focus = false;
+					}.bind(this));
 				}
 				totalQuestions++;
 				const currentLevel = userLevel;
 				userLevel = Math.floor(userScore / 10) + 1;
 				if(currentLevel !== userLevel) {
+					this.blur();
 					swal(
 					  'Good job!',
 					  `You reached Level ${userLevel}!`,
 					  'info'
-					);
+					).then(function() {
+						this.focus();
+						focus = false;
+					}.bind(this));
 				}
 				if(userLevel === 6) {
+					this.blur();
 					swal({
 					  title: 'Congratulations!',
 					  text: `You completed the Quiz!`,
@@ -107,10 +118,13 @@ document.addEventListener('DOMContentLoaded',function() {
 					  userLevel = 1;
 					  totalQuestions = 0;
 					  generateQuestion();
-					});
+					  this.focus();
+					  focus = false;
+					}).bind(this);
 				}
-				generateQuestion();
+				else generateQuestion();
 			}
 		}
+		focus = true;
 	});
 });

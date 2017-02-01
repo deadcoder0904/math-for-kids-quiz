@@ -34,6 +34,13 @@ h1 {
 	text-shadow: 4px 3px 5px orange;
 }
 
+#correct_ans {
+	font-family: 'Verdana';
+	font-size: 2.5em;
+	color: #41b0d4;
+	text-shadow: 4px 3px 5px #3e9a65;
+}
+
 #quiz {
 	display: flex;
 	align-items: center;
